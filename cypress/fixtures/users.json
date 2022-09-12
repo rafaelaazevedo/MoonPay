@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Leanne April",
+    "email": "Sincere@april.biz",
+    "address": {
+      "country": "United States",
+      "postcode": "13874"
+      },
+    "card": {
+      "number": "4242424242424242",
+      "cvv": "123",
+      "expiryDate": "11/24"
+    },
+    "result": "Payment success",
+    "message": "After a successful payment, the customer returns to your website."
+  },
+  {
+      "id": 2,
+      "name": "Jane Scott",
+      "email": "jane@example.com",
+      "address": {
+        "country": "United Kingdom",
+        "postcode": "23424"
+        },
+      "card": {
+        "number": "4000000000003220",
+        "cvv": "123",
+        "expiryDate": "11/24"
+      },
+      "result": "This is a test 3D Secure 2 authentication for a transaction with Powdur.",
+      "message": "In live mode, customers will be asked to verify their identity with a push notification, a text message, or another method chosen by their bank."
+  },
+  {
+      "id": 3,
+      "name": "Graham Northom",
+      "email": "graham@test.net",
+      "address": {
+        "country": "United States",
+        "postcode": "92974"
+        },
+      "card": {
+        "number": "4000000000000002",
+        "cvv": "123",
+        "expiryDate": "11/24"
+      },
+      "result": "Payment declined",
+      "message": "Your card was declined. Please try a different card."
+  }
+]
