@@ -28,29 +28,28 @@ describe("Checkout with Card", () => {
     checkoutPage.visit();
   });
 
-  describe("Checkout with Card", function () {
-    it("have successfully checkout with card", () => {
-      // Mock stripe payment because it is a third party integration and also
-      // because there is a known issue between cypress and stripe payment
-      // https://github.com/cypress-io/cypress/issues/23772
+  it.only("have successfully checkout with card", () => {
+    // Mock stripe payment because it is a third party integration and also
+    // because there is a known issue between cypress and stripe payment
+    // https://github.com/cypress-io/cypress/issues/23772
 
-      checkoutPage.interceptPayment();
+    checkoutPage.interceptPayment();
 
-      checkoutPage.validateTotal();
+    checkoutPage.validateTotal();
 
-      checkoutPage.fillCardPayment(userSucess);
+    checkoutPage.fillCardPayment(userSucess);
 
-      checkoutPage.submitCardPayment();
+    checkoutPage.submitCardPayment();
 
-      checkoutPage.validateSubmitDialog(userSucess);
-    });
-
-    it.skip("should have declined checkout with card", () => {
-      checkoutPage.fillCardPayment(userDeclined);
-
-      checkoutPage.submitCardPayment();
-
-      checkoutPage.validateDeclinedMessage(userDeclined);
-    });
+    checkoutPage.validateSubmitDialog(userSucess);
   });
+
+  it("should have declined checkout with card", () => {
+    checkoutPage.fillCardPayment(userDeclined);
+
+    checkoutPage.submitCardPayment();
+
+    checkoutPage.validateDeclinedMessage(userDeclined);
+  });
+  it("should be able to pay with authentication", () => {});
 });

@@ -11,8 +11,6 @@ describe.skip("Validate Card Payment", () => {
 
   it("should be able to pay with MASTERCARD", () => {});
 
-  it("should be able to pay with authentication", () => {});
-
   it("should validate a fraud payment", () => {});
 
   it("should be able to pay with same month and year of expire date card", () => {});
