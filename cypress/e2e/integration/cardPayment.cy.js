@@ -3,7 +3,7 @@
 //TODO: Add more scenarios to validate the payment with card
 //from different card companies, then different wallets
 //different countries, expire date, etc.
-describe("Validate Card Payment", () => {
+describe.skip("Validate Card Payment", () => {
   let todoItem;
   it("Payment with AMEX", () => {});
 

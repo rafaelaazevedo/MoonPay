@@ -4,8 +4,7 @@ node_modules/
 cypress/videos
 cypress/screenshots
 cypress/results
-mochawesome-report/
-mochawesome.json
 cypress/logs
 dist
 npm-debug.log
+.DS_Store

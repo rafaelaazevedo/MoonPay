@@ -6,7 +6,7 @@ const checkoutPage = new CheckoutPage();
 
 //TODO: Need to explore more scenarios around the page
 //Add validations on the card form, wallet, etc
-describe("Acessibility in the checkout page", () => {
+describe.skip("Acessibility in the checkout page", () => {
   beforeEach(() => {
     Cypress.on("uncaught:exception", (err, runnable) => {
       return false;
@@ -15,12 +15,12 @@ describe("Acessibility in the checkout page", () => {
     checkoutPage.visit();
   });
 
-  it("Has no detectable a11y violations on load", () => {
+  it("should not have detectable a11y violations on load", () => {
     // Test the page at initial load
     cy.checkA11y();
   });
 
-  it("has correct validations when email is incorrect", () => {});
+  it("should have correct validations when email is incorrect", () => {});
 
   it("should load apple wallet dialog", () => {});
 
@@ -36,7 +36,7 @@ describe("Acessibility in the checkout page", () => {
 
   it("Has no a11y violations after button click", () => {
     // Interact with the page, then check for a11y issues
-    checkoutPage.submitCardPayment.click();
+    checkoutPage.submitCardPayment().click();
     cy.checkA11y();
   });
 });

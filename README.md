@@ -13,8 +13,11 @@ I could add these extra steps after the scenarios are covered or before dependin
 - CI/CD pipeline
 - Feature Tag
 - ESLint
+- Security Tests (Cross-origin, SQL Injection, etc...)
 - Retry mechanism if need it
 - Other browsers and parallel tests
+- Performance Tests
+- Cloud
 
 # Installation
 

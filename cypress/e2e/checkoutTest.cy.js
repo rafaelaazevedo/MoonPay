@@ -29,7 +29,7 @@ describe("Checkout with Card", () => {
   });
 
   describe("Checkout with Card", function () {
-    it("successfully checkout with card", () => {
+    it("have successfully checkout with card", () => {
       // Mock stripe payment because it is a third party integration and also
       // because there is a known issue between cypress and stripe payment
       // https://github.com/cypress-io/cypress/issues/23772
@@ -45,7 +45,7 @@ describe("Checkout with Card", () => {
       checkoutPage.validateSubmitDialog(userSucess);
     });
 
-    it("declined checkout with card", () => {
+    it("should have declined checkout with card", () => {
       checkoutPage.fillCardPayment(userDeclined);
 
       checkoutPage.submitCardPayment();
