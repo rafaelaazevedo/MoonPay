@@ -16,12 +16,11 @@ ENV CI=true
 USER cypress
 
 # install dependencies
-COPY package.json package-lock.json ./
+COPY package.json ./
 RUN npm install
 
-# copy plugins configuration over to docker
-COPY .eslintrc.json .prettierrc.yaml cypress.config.js ./
-COPY reporter.config.json ./
+# copy configurations over to docker
+COPY cypress.config.js ./
 
 # copy tests
 COPY cypress cypress

@@ -29,7 +29,7 @@
       "expiryDate": "11/24"
     },
     "result": "This is a test 3D Secure 2 authentication for a transaction with Powdur.",
-    "message": "In live mode, customers will be asked to verify their identity with a push notification, a text message, or another method chosen by their bank."
+    "message": "authentication"
   },
   {
     "id": 3,
@@ -45,6 +45,16 @@
       "expiryDate": "11/24"
     },
     "result": "Payment declined",
-    "message": "Your card was declined. Please try a different card."
+    "message": "declined"
+  },
+  {
+    "id": 4,
+    "result": "Google Play",
+    "message": "Your customer can now check out in seconds by simply authenticating the payment."
+  },
+  {
+    "id": 5,
+    "result": "Apple Pay",
+    "message": "Your customer can now check out in seconds by simply authenticating the payment through Face ID or Touch ID."
   }
 ]

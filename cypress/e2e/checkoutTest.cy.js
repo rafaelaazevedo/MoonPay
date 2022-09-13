@@ -1,8 +1,22 @@
 /// <reference types="Cypress" />
 
-import CheckoutPage from "../elements/pages/checkoutPage";
+import CheckoutPage from "./elements/pages/checkoutPage";
+import users from "../fixtures/users.json";
 
 const checkoutPage = new CheckoutPage();
+
+// Get the user for each scenario
+// Could have done a filter in the json to get the data for that specific
+// scenario so it woudlnt be hard coded here
+// but I thought about focusing on the diversity of the tests more
+
+// Didnt do the authentication and apple and google payment
+// As I have coded the integration/api tests for them
+// Also because it is a third party dependent, we can mock the api
+// to assure our side of the product is working
+// Still worth to do some visual validation like visual regression tests on them
+const userSucess = users[0];
+const userDeclined = users[2];
 
 describe("Checkout with Card", () => {
   // Ignore exception when loading the checkout page
@@ -14,53 +28,40 @@ describe("Checkout with Card", () => {
     checkoutPage.visit();
   });
 
-  describe.skip("Checkout with Card", function () {
+  describe("Checkout with Card", function () {
     it("successfully checkout with card", () => {
-      checkoutPage.fillCardPayment(0);
+      // Mock stripe payment because it is a third party integration and also
+      // because there is a known issue between cypress and stripe payment
+      // https://github.com/cypress-io/cypress/issues/23772
+
+      checkoutPage.interceptPayment();
+
+      cy.intercept(
+        "POST",
+        "https://api.stripe.com/v1/payment_pages/*/confirm",
+        {
+          statusCode: 200,
+          body: {
+            error: false,
+          },
+        }
+      ).as("confirmPayment");
+
+      checkoutPage.validateTotal();
+
+      checkoutPage.fillCardPayment(userSucess);
 
       checkoutPage.submitCardPayment();
 
-      checkoutPage.validateSubmitDialog(0);
-
-      cy.visualSnapshot("Verified Checkout with Card");
+      checkoutPage.validateSubmitDialog(userSucess);
     });
 
     it("declined checkout with card", () => {
-      checkoutPage.fillCardPayment(2);
+      checkoutPage.fillCardPayment(userDeclined);
 
       checkoutPage.submitCardPayment();
 
-      checkoutPage.validateDeclinedMessage(1);
-
-      cy.visualSnapshot("Verified Declined Payment with Card");
-    });
-
-    it("authentication checkout with card", () => {
-      checkoutPage.fillCardPayment(1);
-
-      checkoutPage.submitCardPayment();
-
-      checkoutPage.validateSubmitDialog(1);
-
-      cy.visualSnapshot("Verified Authentication with Card");
-    });
-  });
-
-  describe("Checkout with Wallets", function () {
-    it("checkout with apple", () => {
-      checkoutPage.payApplePay();
-
-      checkoutPage.validateApplePay();
-
-      cy.visualSnapshot("Verified Apple Pay");
-    });
-
-    it("checkout with googlepay", () => {
-      checkoutPage.payGooglePay();
-
-      checkoutPage.validateGooglePay();
-
-      cy.visualSnapshot("Verified Google Pay");
+      checkoutPage.validateDeclinedMessage(userDeclined);
     });
   });
 });
