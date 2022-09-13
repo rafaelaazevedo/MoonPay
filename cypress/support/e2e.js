@@ -18,7 +18,6 @@
 // require('./commands')
 
 import "./commands";
-import "cypress-axe";
 
 Cypress.Screenshot.defaults({
   screenshotOnRunFailure: true,

@@ -1,81 +1,68 @@
 /// <reference types="Cypress" />
 
 class checkoutElements {
-  // get the body inside iframe checkout
-  getCheckoutIframe() {
-    return cy.enter("#checkout-demo").then((getBody) => {
-      getBody();
-    });
-  }
-
   getIncreaseQty() {
-    return this.getCheckoutIframe().find(
-      ".AdjustQuantityModal-toggleQuantityBtn--plus"
-    );
+    return cy.get(".AdjustQuantityModal-toggleQuantityBtn--plus");
   }
 
   getDecreaseQty() {
-    return this.getCheckoutIframe().find(
-      ".AdjustQuantityModal-toggleQuantityBtn--minus"
-    );
+    return cy.get(".AdjustQuantityModal-toggleQuantityBtn--minus");
   }
 
   getAdjustQty() {
-    return this.getCheckoutIframe().find(".LineItem-adjustableQty");
+    return cy.get(".LineItem-adjustableQty");
   }
 
   getUpdateQty() {
-    return this.getCheckoutIframe().find(".AdjustQuantityFooter-btn");
+    return cy.get(".AdjustQuantityFooter-btn");
   }
 
   getValueProducts() {
-    return this.getCheckoutIframe().find(".Text--tabularNumbers");
+    return cy.get(".Text--tabularNumbers");
   }
 
   getTotalAmount() {
-    return this.getCheckoutIframe().find("#ProductSummary-totalAmount");
+    return cy.get("#ProductSummary-totalAmount");
   }
 
   getEmail() {
-    return this.getCheckoutIframe().find("#email");
+    return cy.get("#email");
   }
 
   getCardNumber() {
-    return this.getCheckoutIframe().find("#cardNumber");
+    return cy.get("#cardNumber");
   }
 
   getCardExpiry() {
-    return this.getCheckoutIframe().find("#cardExpiry");
+    return cy.get("#cardExpiry");
   }
 
   getCardCvc() {
-    return this.getCheckoutIframe().find("#cardCvc");
+    return cy.get("#cardCvc");
   }
 
   getBillingName() {
-    return this.getCheckoutIframe().find("#billingName");
+    return cy.get("#billingName");
   }
 
   getBillingCountry() {
-    return this.getCheckoutIframe().find("#billingCountry");
+    return cy.get("#billingCountry");
   }
 
   getBillingPostalCode() {
-    return this.getCheckoutIframe().find("#billingPostalCode");
+    return cy.get("#billingPostalCode");
   }
 
   getSubmit() {
-    return this.getCheckoutIframe().find(
-      '[data-testid="hosted-payment-submit-button"]'
-    );
-  }
-
-  getDialog() {
-    return cy.get(".ChromeDialog-Dialog", { timeout: 100000 });
+    return cy.get('[data-testid="hosted-payment-submit-button"]');
   }
 
   getErrorValidation() {
-    return this.getCheckoutIframe().find(".FieldError");
+    return cy.get(".FieldError");
+  }
+
+  getConfirmationPayment() {
+    return cy.get(".SuccessOverlay");
   }
 }
 

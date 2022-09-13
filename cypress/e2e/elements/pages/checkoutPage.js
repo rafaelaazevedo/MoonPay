@@ -41,10 +41,12 @@ class CheckoutPage {
     checkoutElements.getAdjustQty().first().click();
     this.increaseQty();
     checkoutElements.getUpdateQty().click();
+    checkoutElements.getUpdateQty().should("be.disabled");
 
     checkoutElements.getAdjustQty().last().click();
     this.decreaseQty();
     checkoutElements.getUpdateQty().click();
+    checkoutElements.getUpdateQty().should("be.disabled");
   }
 
   validateTotal() {
@@ -95,6 +97,7 @@ class CheckoutPage {
 
   submitCardPayment() {
     checkoutElements.getSubmit().click();
+    checkoutElements.getSubmit().should("be.disabled");
   }
 
   // As mentioned in the README file, this is
@@ -108,33 +111,19 @@ class CheckoutPage {
   // but then this would assert the expected message is there, but if development code
   // has the wrong value then the test would be also wrong.
   // And another solution could be just moving this test to the snapshot visual regression.
-  validateSubmitDialog(user) {
-    //Known issue when sending the payment with cypress
-    //https://github.com/cypress-io/cypress/issues/23772
-    //so not possible to real test e2e integrating with third parties here
-    //but will be able to mock which is the ideal in most of the cases
-    //so no dependency on the network or the third party services
-    //and we are able to test the application in isolation
+  //Known issue when sending the payment with cypress
+  //https://github.com/cypress-io/cypress/issues/23772
+  //so not possible to real test e2e integrating with third parties here
+  //but will be able to mock which is the ideal in most of the cases
+  //so no dependency on the network or the third party services
+  //and we are able to test the application in isolation
+  validatePaymentConfirmation(user) {
+    cy.url({ timeout: 60000 }).should("contains", "success");
     checkoutElements
-      .getDialog()
+      .getConfirmationPayment()
       .should("be.visible")
       .and("contain", user.message);
     return this;
-  }
-
-  interceptPayment() {
-    // cy.intercept("POST", "https://api.stripe.com/v1/payment_methods", {
-    //   followRedirect: false,
-    //   fixture: "../fixtures/payment_intent.json",
-    // }).as("createPaymentIntent");
-    // return cy
-    //   .intercept("POST", "https://api.stripe.com/v1/payment_pages/*/confirm", {
-    //     statusCode: 200,
-    //     body: {
-    //       error: false,
-    //     },
-    //   })
-    //   .as("confirmPayment");
   }
 
   validateDeclinedMessage(user) {

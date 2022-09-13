@@ -8,3 +8,5 @@ cypress/logs
 dist
 npm-debug.log
 .DS_Store
+**/*.mp4
+**/*.png

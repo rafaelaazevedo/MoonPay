@@ -6,15 +6,12 @@ import users from "../fixtures/users.json";
 const checkoutPage = new CheckoutPage();
 
 // Get the user for each scenario
-// Could have done a filter in the json to get the data for that specific
+// Could also have done a filter in the json to get the data for that specific
 // scenario so it woudlnt be hard coded here
-// but I thought about focusing on the diversity of the tests more
 
 // Didnt do the authentication and apple and google payment
-// As I have coded the integration/api tests for them
-// Also because it is a third party dependent, we can mock the api
-// to assure our side of the product is working
-// Still worth to do some visual validation like visual regression tests on them
+// because it is third party dependent, we can mock the api or just do integration
+// tests between then, but still worth to do some component or visual regression on it
 const userSucess = users[0];
 const userDeclined = users[2];
 
@@ -25,15 +22,16 @@ describe("Checkout with Card", () => {
       return false;
     });
 
-    checkoutPage.visit();
+    cy.request(
+      "https://checkout.stripe.dev/api/demo-session?country=us&billingPeriod=monthly&hasBgColor=false&bgColor=%2523ffffff&buttonColor=%2523192552&hasBillingAndShipping=false&hasCoupons=false&hasFreeTrial=false&hasShippingRate=false&hasTaxes=false&mode=payment&wallet=applePay&hasPolicies=false&billingType=flat&hasUpsells=false&hasPhoneNumber=false&borderStyle=rounded&fontStyle=System&hasCrossSells=false"
+    ).then((response) => {
+      cy.visit(response.body.url);
+    });
   });
 
-  it.only("have successfully checkout with card", () => {
-    // Mock stripe payment because it is a third party integration and also
-    // because there is a known issue between cypress and stripe payment
+  it("have successfully checkout with card", () => {
+    // there is a known issue between cypress and stripe payment
     // https://github.com/cypress-io/cypress/issues/23772
-
-    checkoutPage.interceptPayment();
 
     checkoutPage.validateTotal();
 
@@ -41,7 +39,7 @@ describe("Checkout with Card", () => {
 
     checkoutPage.submitCardPayment();
 
-    checkoutPage.validateSubmitDialog(userSucess);
+    checkoutPage.validatePaymentConfirmation(userSucess);
   });
 
   it("should have declined checkout with card", () => {

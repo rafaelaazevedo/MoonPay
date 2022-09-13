@@ -1,9 +1,5 @@
 /// <reference types="Cypress" />
 
-import CheckoutPage from "./elements/pages/checkoutPage";
-
-const checkoutPage = new CheckoutPage();
-
 //TODO: Need to explore more scenarios around the page
 //Add validations on the card form, wallet, etc
 describe.skip("Acessibility in the checkout page", () => {
@@ -11,8 +7,6 @@ describe.skip("Acessibility in the checkout page", () => {
     Cypress.on("uncaught:exception", (err, runnable) => {
       return false;
     });
-
-    checkoutPage.visit();
   });
 
   it("should not have detectable a11y violations on load", () => {});
