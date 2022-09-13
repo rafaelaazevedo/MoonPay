@@ -29,6 +29,10 @@ To install the dependencies:
 To install the dependencies:
 `npm run cy:open`
 
+# Build Cypress Docker image
+
+`docker:build`
+
 ## Run Unit/Component Tests
 
 For the unit tests I would need to have access to the development code, but we could have some component tests as well and then reducing the number of e2e tests, but component tests are in beta for Cypress at the moment.
@@ -36,8 +40,6 @@ For the unit tests I would need to have access to the development code, but we c
 ## Run Integration Tests
 
 I wasnt able to actually code, but I have added the basic and initial scenarios that I would create. Instead of having integration tests we could have contract tests between the apis which would remove the fragility of the network, but I know some people dont call them as real integration tests since you mock the other part.
-
-## Run Component Tests
 
 ## Run Acessibility Tests
 
@@ -49,6 +51,8 @@ I wasnt able to actually code, but I have added the basic and initial scenarios 
 
 ## Run E2E Tests
 
+`npm run e2e`
+
 I've used POM as the structure to build the e2e tests and decided to follow the ratio 10% E2E Tests, 20% Integration Tests and 70% component/unit tests. I know some Cypress devs prefer to use Application Actions instead as it is faster, but I am a bit skeptical to use mostly because you need to change the development code and I try to avoid this as much as possible unless you are doing TDD. I would change the development code now only if it is to add the `data-cy`, `data-testid`... to use as locators or when there is no other way to test a scenario. I like to use POM most of the times because it is simple and not over-engineered when doing right and gives a good level of organisation and structure for the project.
 
 I didn't code all the tests because I assumed (hopefully right) was more important to show the knowledge that I have in many parts of an Automation Project and not only in the framework itself or just coding tests that are similar to each other.
@@ -56,7 +60,3 @@ I didn't code all the tests because I assumed (hopefully right) was more importa
 Locators: some locators are not ideal because I didnt have access to the development code, so I had to get the best locator I could use from the DOM, which means sometimes was an id and sometimes was the CSS (Im not proud of this haha)
 
 Assertions: I have done a really basic assertion specially when it comes about the messages and field validation and what is written because I didnt want to create a big dependency on the data and css. So, as long as there is a css class related to error changing the layout or highligting a validation with a key word in the message I would assert it, but for the messages I could even use the development code to get what is the message expected or maybe assert this on the visual regression tests. The only downside with getting the message from the development code is that if it is wrong there would say it is okay in the tests even tho the message could be wrong.
-
-I could move some of the scenarios like Declined Card, Authentication, GooglePay and GoogleApple to pure visual, integration or component tests.
-
-`npm run e2e`

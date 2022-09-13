@@ -15,10 +15,7 @@ describe.skip("Acessibility in the checkout page", () => {
     checkoutPage.visit();
   });
 
-  it("should not have detectable a11y violations on load", () => {
-    // Test the page at initial load
-    cy.checkA11y();
-  });
+  it("should not have detectable a11y violations on load", () => {});
 
   it("should have correct validations when email is incorrect", () => {});
 
@@ -28,15 +25,11 @@ describe.skip("Acessibility in the checkout page", () => {
   it("should load sucess payment dialog", () => {});
   it("should load auhentication payment dialog", () => {});
 
-  it("has correct validations on submit button when form is incomplete", () => {});
+  it("should have correct validations on submit button when form is incomplete", () => {});
 
-  it("has correct validations when expire date is in the past", () => {});
+  it("should have correct validations when expire date is in the past", () => {});
 
-  it("has correct validations when zipcode is incorrect is in the past", () => {});
+  it("should have correct validations when zipcode is incorrect is in the past", () => {});
 
-  it("Has no a11y violations after button click", () => {
-    // Interact with the page, then check for a11y issues
-    checkoutPage.submitCardPayment().click();
-    cy.checkA11y();
-  });
+  it("should have no a11y violations after button click", () => {});
 });
