@@ -111,6 +111,10 @@ class CheckoutPage {
   validateSubmitDialog(user) {
     //Known issue when sending the payment with cypress
     //https://github.com/cypress-io/cypress/issues/23772
+    //so not possible to real test e2e integrating with third parties here
+    //but will be able to mock which is the ideal in most of the cases
+    //so no dependency on the network or the third party services
+    //and we are able to test the application in isolation
     checkoutElements
       .getDialog()
       .should("be.visible")

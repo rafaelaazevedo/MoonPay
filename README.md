@@ -2,20 +2,47 @@
 
 TestConfig: Used Cypress Config to have only one baseUrl for the purpose of the test, but in real world the project could also have a env node in cypress.config.js with the specific configuration for a dev, local and qa environment.
 
-Data and Fixtures: It is loaded the expected fixture.json with the data used in that set of scenarios, but it could also be a separated class just to handle and filter the data that is going to be used for each particular scenario instead of loading everything for the set of tests. For the purpose of this test I prefered to focus on having a diversity of different type of test levels instead of improving the data management.
+Data and Fixtures: It is loaded the expected fixture.json with the data used in that set of scenarios, but it could also be a separated class just to handle and filter the data that is going to be used for each particular scenario instead of loading everything for the set of tests. For the purpose of this test I prefered to focus on having a diversity of different type of test levels and fix the iframe and payment problem instead of improving the data management.
+
+BDD: I haven't used BDD for this project and nowadays I have used only for complex projects or when the BA/PO are indeed reading the scenarios, or even when they are helping to write the scenarios and we can reuse in the automation. This could be a team decision, but I would try to avoid adding an extra layer without the need.
+
+Extras:
+I could add these extra steps after the scenarios are covered or before depending on the project, time etc.
+
+- Report
+- CI/CD pipeline
+- Feature Tag
+- ESLint
+- Retry mechanism if need it
+- Other browsers and parallel tests
 
 # Installation
 
 To install the dependencies:
 `npm install`
 
+# Open Cypress
+
+To install the dependencies:
+`npm run cy:open`
+
+## Run Unit/Component Tests
+
+For the unit tests I would need to have access to the development code, but we could have some component tests as well and then reducing the number of e2e tests, but component tests are in beta for Cypress at the moment.
+
 ## Run Integration Tests
+
+I wasnt able to actually code, but I have added the basic and initial scenarios that I would create. Instead of having integration tests we could have contract tests between the apis which would remove the fragility of the network, but I know some people dont call them as real integration tests since you mock the other part.
 
 ## Run Component Tests
 
 ## Run Acessibility Tests
 
+I wasnt able to actually code, but I have added the basic and initial scenarios that I would create.
+
 ## Run Visual Regression Tests
+
+I wasnt able to actually code, but I have added the basic and initial scenarios that I would create. I like the visual regression tests to save time instead of checking for these things on the e2e tests as it saves more time, but this needs to be reviewed according to the maintenance of the project and the error threshold for the layout assertions as well. I have added the responsive layout and some locatization scenarios to the pages.
 
 ## Run E2E Tests
 
@@ -25,6 +52,8 @@ I didn't code all the tests because I assumed (hopefully right) was more importa
 
 Locators: some locators are not ideal because I didnt have access to the development code, so I had to get the best locator I could use from the DOM, which means sometimes was an id and sometimes was the CSS (Im not proud of this haha)
 
-Assertions: I have done a really basic assertion specially when it comes about the messages and what is written because I didnt want to create a big dependency on the data and css. So, as long as there is a css class changing the layout or highligting a validation with a key word in the message I would assert it, but for the messages I might even use the development code to get what is the message expected or maybe assert this on the visual regression tests. The only downside with getting the message from the development code is that if it is wrong there would say it is okay in the tests even tho the message could be wrong.
+Assertions: I have done a really basic assertion specially when it comes about the messages and field validation and what is written because I didnt want to create a big dependency on the data and css. So, as long as there is a css class related to error changing the layout or highligting a validation with a key word in the message I would assert it, but for the messages I could even use the development code to get what is the message expected or maybe assert this on the visual regression tests. The only downside with getting the message from the development code is that if it is wrong there would say it is okay in the tests even tho the message could be wrong.
+
+I could move some of the scenarios like Declined Card, Authentication, GooglePay and GoogleApple to pure visual, integration or component tests.
 
 `npm run e2e`

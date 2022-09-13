@@ -36,17 +36,6 @@ describe("Checkout with Card", () => {
 
       checkoutPage.interceptPayment();
 
-      cy.intercept(
-        "POST",
-        "https://api.stripe.com/v1/payment_pages/*/confirm",
-        {
-          statusCode: 200,
-          body: {
-            error: false,
-          },
-        }
-      ).as("confirmPayment");
-
       checkoutPage.validateTotal();
 
       checkoutPage.fillCardPayment(userSucess);
