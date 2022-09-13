@@ -45,7 +45,7 @@ describe("Checkout with Card", () => {
       checkoutPage.validateSubmitDialog(userSucess);
     });
 
-    it("should have declined checkout with card", () => {
+    it.skip("should have declined checkout with card", () => {
       checkoutPage.fillCardPayment(userDeclined);
 
       checkoutPage.submitCardPayment();

@@ -5,34 +5,38 @@
 //different countries, expire date, etc.
 describe.skip("Validate Card Payment", () => {
   let todoItem;
-  it("Payment with AMEX", () => {});
+  it("should be able to pay with AMEX", () => {});
 
-  it.only("Payment with VISA", () => {});
+  it("should be able to pay with VISA", () => {});
 
-  it("Payment with MASTERCARD", () => {});
+  it("should be able to pay with MASTERCARD", () => {});
 
-  it("Payment with same month and year of expire date", () => {});
+  it("should be able to pay with authentication", () => {});
 
-  it("Payment with not matching billing address", () => {});
+  it("should validate a fraud payment", () => {});
 
-  it("Payment with country without postal code", () => {});
+  it("should be able to pay with same month and year of expire date card", () => {});
+
+  it("should not be able to pay with not matching billing address", () => {});
+
+  it("should be able to pay with country that doesnt require a postal code", () => {});
 
   //I like to test this in the api as well to be sure we are validating this
   //not only on the frontend, but also in the api level
-  it("Validate payment with empty fields", () => {});
+  it("should not be able to pay with empty fields", () => {});
 
   //This would be to simulate a bad network connection
   //and see how the api and frontend reacts
-  it("Payment throttling the network", () => {});
+  it("should be able to pay when throttling the network", () => {});
 
-  it("Payment with not matching name", () => {});
+  it("should not be able to pay with not matching name", () => {});
 
-  it("Payment with not matching email", () => {});
+  it("should not be able to pay with not matching email", () => {});
 
-  it("Payment with minimun quantity for product", () => {});
+  it("should be able to pay with minimun quantity for product", () => {});
 
-  it("Payment with maximun quantity for product", () => {});
+  it("should be able to pay with maximun quantity for product", () => {});
 
   // in case this is possible through API
-  it("Payment with no product", () => {});
+  it("should not be able to pay with no product selected", () => {});
 });

@@ -123,19 +123,18 @@ class CheckoutPage {
   }
 
   interceptPayment() {
-    cy.intercept("POST", "https://api.stripe.com/v1/payment_methods", {
-      followRedirect: false,
-      fixture: "../fixtures/payment_intent.json",
-    }).as("createPaymentIntent");
-
-    return cy
-      .intercept("POST", "https://api.stripe.com/v1/payment_pages/*/confirm", {
-        statusCode: 200,
-        body: {
-          error: false,
-        },
-      })
-      .as("confirmPayment");
+    // cy.intercept("POST", "https://api.stripe.com/v1/payment_methods", {
+    //   followRedirect: false,
+    //   fixture: "../fixtures/payment_intent.json",
+    // }).as("createPaymentIntent");
+    // return cy
+    //   .intercept("POST", "https://api.stripe.com/v1/payment_pages/*/confirm", {
+    //     statusCode: 200,
+    //     body: {
+    //       error: false,
+    //     },
+    //   })
+    //   .as("confirmPayment");
   }
 
   validateDeclinedMessage(user) {

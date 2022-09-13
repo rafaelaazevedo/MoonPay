@@ -21,12 +21,10 @@ I could add these extra steps after the scenarios are covered or before dependin
 
 # Installation
 
-To install the dependencies:
 `npm install`
 
 # Open Cypress
 
-To install the dependencies:
 `npm run cy:open`
 
 # Build Cypress Docker image
