@@ -9,8 +9,7 @@
     },
     "card": {
       "number": "4242424242424242",
-      "cvv": "123",
-      "expiryDate": "11/24"
+      "cvv": "123"
     },
     "result": "Payment success",
     "message": "After a successful payment, the customer returns to your website."
@@ -25,8 +24,7 @@
     },
     "card": {
       "number": "4000000000003220",
-      "cvv": "123",
-      "expiryDate": "11/24"
+      "cvv": "123"
     },
     "result": "This is a test 3D Secure 2 authentication for a transaction with Powdur.",
     "message": "authentication"
@@ -41,8 +39,7 @@
     },
     "card": {
       "number": "4000000000000002",
-      "cvv": "123",
-      "expiryDate": "11/24"
+      "cvv": "123"
     },
     "result": "Payment declined",
     "message": "declined"

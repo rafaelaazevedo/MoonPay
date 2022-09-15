@@ -23,7 +23,7 @@
     "cypress": "^10.7.0",
     "cypress-axe": "^1.0.0",
     "cypress-commands": "^1.1.0",
-    "cypress-visual-regression": "^1.7.0",
-    "cypress-wait-until": "^1.7.2"
+    "cypress-iframe": "^1.0.1",
+    "cypress-visual-regression": "^1.7.0"
   }
 }

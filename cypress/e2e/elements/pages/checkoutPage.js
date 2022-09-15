@@ -13,11 +13,10 @@ class CheckoutPage {
   fillCardPayment(user) {
     this.fillEmail(user.email);
     this.fillCardNumber(user.card.number);
-    // I could have added a logic here to be currentYear + 1
-    // so the data wouldn't need to be updated just to accomodate
-    // the tests, but for now I left it data dependent (not proud of it,
-    // but just saving time to be able to finish the test)
-    this.fillCardExpiryDate(user.card.expiryDate);
+    //Get 12th month and current year + 2 years
+    this.fillCardExpiryDate(
+      "12" + (new Date().getFullYear() + 2).toString().substr(-2)
+    );
     this.fillCardCvc(user.card.cvv);
     this.fillBillingName(user.name);
     this.selectBillingCountry(user.address.country);
@@ -25,7 +24,8 @@ class CheckoutPage {
   }
 
   //Here we can pass the quantity as parameter and add a loop but for
-  //the porpouse of this test I kept it simple, same for the decrease
+  //the porpouse of this test I kept it simple just to test the function to add and
+  //reduce the quantity all coomponents together
   increaseQty() {
     checkoutElements.getIncreaseQty().click();
   }
@@ -34,26 +34,23 @@ class CheckoutPage {
     checkoutElements.getDecreaseQty().click();
   }
 
-  // The qty doesnt matter much as the purpose
-  // this test is to validate the integration between the components
-  // and the end to end flow.
   selectProductQty() {
     checkoutElements.getAdjustQty().first().click();
     this.increaseQty();
     checkoutElements.getUpdateQty().click();
-    checkoutElements.getUpdateQty().should("be.disabled");
+    checkoutElements.getUpdateQty({ timeout: 5000 }).should("be.disabled");
 
     checkoutElements.getAdjustQty().last().click();
     this.decreaseQty();
     checkoutElements.getUpdateQty().click();
-    checkoutElements.getUpdateQty().should("be.disabled");
+    checkoutElements.getUpdateQty({ timeout: 5000 }).should("be.disabled");
   }
 
   validateTotal() {
     this.selectProductQty();
-    // Moved the complexity of the calculus out of the tests and
-    // gave the responsibility to assert to the data
-    // as it is static and can be used for regression tests
+    // The reason why I compared the string values is because
+    // I moved the complexity of the calculus out of the tests and
+    // gave the responsibility to assert the data as it is static, good for regression tests
     checkoutElements
       .getValueProducts()
       .eq(1)
@@ -97,38 +94,87 @@ class CheckoutPage {
 
   submitCardPayment() {
     checkoutElements.getSubmit().click();
-    checkoutElements.getSubmit().should("be.disabled");
   }
 
   // As mentioned in the README file, this is
   // a simple validation to check if the message contains
   // a key word so it is not every character dependent
   // since there is a list of possible messages.
-  // Another solution would be creating a list with all the possible messages
-  // and going through them to assert which one matches.
-  // I opted to go for the simplest solution and as much independent as possible.
+  // I opted to go for the simplest solution and as much independent as possible,
+  // but if there is a change in the key word or instead of a string we show a picture then we
+  // would need to update this again.
   // Another solution could be getting these messages straight from the development code
   // but then this would assert the expected message is there, but if development code
   // has the wrong value then the test would be also wrong.
   // And another solution could be just moving this test to the snapshot visual regression.
-  //Known issue when sending the payment with cypress
-  //https://github.com/cypress-io/cypress/issues/23772
-  //so not possible to real test e2e integrating with third parties here
-  //but will be able to mock which is the ideal in most of the cases
-  //so no dependency on the network or the third party services
-  //and we are able to test the application in isolation
   validatePaymentConfirmation(user) {
-    cy.url({ timeout: 60000 }).should("contains", "success");
+    checkoutElements.getSubmit().should("be.disabled");
+    cy.url({ timeout: 50000 }).should("contains", "success");
     checkoutElements
       .getConfirmationPayment()
       .should("be.visible")
       .and("contain", user.message);
     return this;
   }
-
   validateDeclinedMessage(user) {
-    checkoutElements.getErrorValidation().should("be.visible");
+    checkoutElements.getErrorValidation({ timeout: 5000 }).should("be.visible");
     checkoutElements.getErrorValidation().should("contain", user.message);
+  }
+
+  // *** Get elements from Iframe test approach *** //
+
+  submitCardPaymentFromIframe() {
+    checkoutElements.getSubmitFromIframe().click();
+  }
+
+  fillEmailFromIframe(value) {
+    checkoutElements.getEmailFromIframe().type(value);
+  }
+
+  fillCardNumberFromIframe(value) {
+    checkoutElements.getCardNumberFromIframe().type(value);
+  }
+
+  fillCardExpiryDateFromIframe(value) {
+    checkoutElements.getCardExpiryFromIframe().type(value);
+  }
+
+  fillCardCvcFromIframe(value) {
+    checkoutElements.getCardCvcFromIframe().type(value);
+  }
+
+  fillBillingNameFromIframe(value) {
+    checkoutElements.getBillingNameFromIframe().type(value);
+  }
+
+  selectBillingCountryFromIframe(value) {
+    checkoutElements.getBillingCountryFromIframe().select(value);
+  }
+
+  fillBillingPostcodeFromIframe(value) {
+    checkoutElements.getBillingPostalCodeFromIframe().type(value);
+  }
+
+  fillCardPaymentFromIframe(user) {
+    this.fillEmailFromIframe(user.email);
+    this.fillCardNumberFromIframe(user.card.number);
+    this.fillCardExpiryDateFromIframe(
+      "12" + (new Date().getFullYear() + 2).toString().substr(-2)
+    );
+    this.fillCardCvcFromIframe(user.card.cvv);
+    this.fillBillingNameFromIframe(user.name);
+    this.selectBillingCountryFromIframe(user.address.country);
+    this.fillBillingPostcodeFromIframe(user.address.postcode);
+  }
+
+  validateAuthenticationMessage(user) {
+    //cypress-wait-until plugin didnt work as I expected so I added a wait here,
+    //another solution could be slowing down the speed of cypress.
+    cy.wait(5000);
+    checkoutElements.getAuthenticationValidation().should("be.visible");
+    checkoutElements
+      .getAuthenticationValidation()
+      .should("contain", user.message);
   }
 }
 
