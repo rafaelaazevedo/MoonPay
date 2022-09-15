@@ -6,8 +6,9 @@ Data and Fixtures: It is loaded the expected fixture.json with the data used in 
 
 BDD: I opted to not use BDD for this project because nowadays I have used only for complex projects or when the BA/PO need to understand the scenarios. I would try to avoid adding an extra layer without the need, but every project has different needs.
 
+I unfortunally spent more time than expected trying to get the best way to test the iframes, so in the end I didn't have enough time to implement the other type of tests, but this is a list of the extra I would add after implementing them.
+
 Extras:
-Next steps would be creating:
 
 - Report
 - CI/CD pipeline
@@ -69,6 +70,8 @@ isual regression tests to save time instead of checking for validations on the e
 I've used POM as the structure to build the e2e tests and decided to follow the ratio 10% E2E Tests, 20% Integration Tests and 70% component/unit tests. I know some Cypress devs prefer to use Application Actions instead as it is faster, but I am a bit skeptical to use mostly because you need to change the development code and I try to avoid this as much as possible unless you are doing TDD, unless it is to add the `data-cy`, `data-testid`.
 
 Locators: some locators are not ideal because I didn't have access to the development code, so I had to get the best locator I could use from the DOM, which means sometimes was an id and sometimes was the CSS (Im not proud of this haha)
+
+Waits: Not proud of that, but because of the deadline I couldnt't explore using cypress-wait-until plugin, which would be a better solution instead of just having random waits.
 
 Assertions: I have done a really basic assertion specially when it comes about the messages and field validation and what is written because I didnt want to create a big dependency on the data and css. So, as long as there is a css class related to error changing the layout or highligting a validation with a key word in the message I would assert it.
 
