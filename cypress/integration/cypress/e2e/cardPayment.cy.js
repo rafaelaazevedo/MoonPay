@@ -1,9 +1,9 @@
 /// <reference types="Cypress" />
 
-//TODO: Add more scenarios to validate the payment with card
-//from different card companies, then different wallets
+//TODO: Create the scenarios to validate the payment with card
+//from different card companies, different wallets
 //different countries, expire date, etc.
-describe.skip("Validate Card Payment", () => {
+describe("Validate Card Payment", () => {
   let todoItem;
   it("should be able to pay with AMEX", () => {});
 

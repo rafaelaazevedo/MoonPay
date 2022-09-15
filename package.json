@@ -5,11 +5,15 @@
   "main": "index.js",
   "scripts": {
     "cy:open": "cypress open",
-    "tests:e2e": "cypress run",
-    "tests:acessibility": "cypress run -P \"cypress/acessibility\"",
-    "tests:integration": "cypress run -P \"cypress/integration\"",
-    "tests:visual": "cypress run -P \"cypress/visual\"",
-    "docker:build": "docker build -t MoonPayTest ."
+    "tests:e2e": "cypress run -P \"cypress/e2e\" --config-file cypress.config.js",
+    "tests:acessibility": "cypress run -P \"cypress/acessibility\" --config-file cypress.config.js",
+    "tests:integration": "cypress run -P \"cypress/integration\" --config-file cypress.config.js",
+    "tests:visual": "cypress run -P \"cypress/visual\" --config-file cypress.config.js",
+    "docker:build": "docker build -t MoonPayTest .",
+    "clean:reports": "rm -rf cypress/e2e/mochawesome-report/",
+    "merge:reports": "mochawesome-merge cypress/e2e/mochawesome-report/*.json > cypress/e2e/mochawesome-report/cypress-tests-report.json",
+    "create:html:report": "marge --reportDir E2ETestReport cypress/e2e/mochawesome-report/cypress-tests-report.json",
+    "generate:html:report": "npm run merge:reports && npm run create:html:report"
   },
   "keywords": [
     "test",
@@ -19,11 +23,18 @@
   ],
   "author": "Rafaela Azevedo",
   "license": "ISC",
+  "peerDependencies": {
+    "axe-core": "^4.4.3"
+  },
   "devDependencies": {
-    "cypress": "^10.7.0",
+    "cypress": "^10.8.0",
     "cypress-axe": "^1.0.0",
     "cypress-commands": "^1.1.0",
     "cypress-iframe": "^1.0.1",
-    "cypress-visual-regression": "^1.7.0"
+    "cypress-visual-regression": "^1.7.0",
+    "mocha": "^10.0.0",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^4.2.1",
+    "mochawesome-report-generator": "^6.2.0"
   }
 }

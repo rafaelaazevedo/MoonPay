@@ -8,4 +8,10 @@ module.exports = defineConfig({
     viewportHeight: 660,
     viewportWidth: 1300,
   },
+  reporter: "../../node_modules/mochawesome/src/mochawesome.js",
+  reporterOptions: {
+    overwrite: true,
+    html: false,
+    json: true,
+  },
 });

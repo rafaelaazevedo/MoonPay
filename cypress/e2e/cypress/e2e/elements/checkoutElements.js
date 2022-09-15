@@ -65,7 +65,9 @@ class checkoutElements {
     return cy.get(".SuccessOverlay");
   }
 
-  // *** Get elements from Iframe test approach *** //
+  // ***********************************************
+  // *** Get elements from Iframe test approach ****
+
   getCheckoutIframe() {
     return cy.enter("#checkout-demo").then((getBody) => {
       getBody();

@@ -7,7 +7,5 @@ module.exports = defineConfig({
     projectId: "gkm3uq",
     viewportHeight: 660,
     viewportWidth: 1300,
-    supportFile: false,
-    specPattern: "**/*.cy.js",
   },
 });

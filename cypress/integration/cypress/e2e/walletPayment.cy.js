@@ -1,8 +1,8 @@
 /// <reference types="Cypress" />
 
-//TODO: Add  scenarios to validate the payment with different wallets
+//TODO: Create the scenarios to validate the payment with different wallets
 
-describe.skip("Validate Wallet Payment", () => {
+describe("Validate Wallet Payment", () => {
   let todoItem;
   it("should be able to pay with Apple Wallet", () => {});
 

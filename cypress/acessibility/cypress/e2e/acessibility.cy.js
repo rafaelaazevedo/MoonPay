@@ -1,15 +1,15 @@
 /// <reference types="Cypress" />
 
-//TODO: Need to explore more scenarios around the page
-//Add validations on the card form, wallet, etc
-describe.skip("Acessibility in the checkout page", () => {
+//TODO: Create the scenarios to validations for the card form, wallet, etc
+describe("Acessibility in the checkout page", () => {
   beforeEach(() => {
-    Cypress.on("uncaught:exception", (err, runnable) => {
-      return false;
-    });
+    cy.visit("/preview");
+    cy.injectAxe();
   });
 
-  it("should not have detectable a11y violations on load", () => {});
+  it("should not have detectable a11y violations on load", () => {
+    cy.checkA11y();
+  });
 
   it("should have correct validations when email is incorrect", () => {});
 

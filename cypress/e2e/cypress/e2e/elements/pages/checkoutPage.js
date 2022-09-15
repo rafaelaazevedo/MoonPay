@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-import orders from "../../../fixtures/orders.json";
+import orders from "../../../../fixtures/orders.json";
 import CheckoutElements from "../checkoutElements";
 
 const checkoutElements = new CheckoutElements();
@@ -23,9 +23,6 @@ class CheckoutPage {
     this.fillBillingPostcode(user.address.postcode);
   }
 
-  //Here we can pass the quantity as parameter and add a loop but for
-  //the porpouse of this test I kept it simple just to test the function to add and
-  //reduce the quantity all coomponents together
   increaseQty() {
     checkoutElements.getIncreaseQty().click();
   }
@@ -35,22 +32,22 @@ class CheckoutPage {
   }
 
   selectProductQty() {
+    cy.wait(2000);
+    checkoutElements.getAdjustQty().should("be.visible");
     checkoutElements.getAdjustQty().first().click();
     this.increaseQty();
     checkoutElements.getUpdateQty().click();
-    checkoutElements.getUpdateQty({ timeout: 5000 }).should("be.disabled");
+    checkoutElements.getUpdateQty().should("be.disabled");
 
     checkoutElements.getAdjustQty().last().click();
     this.decreaseQty();
     checkoutElements.getUpdateQty().click();
-    checkoutElements.getUpdateQty({ timeout: 5000 }).should("be.disabled");
+    checkoutElements.getUpdateQty().should("be.disabled");
   }
 
   validateTotal() {
-    this.selectProductQty();
-    // The reason why I compared the string values is because
-    // I moved the complexity of the calculus out of the tests and
-    // gave the responsibility to assert the data as it is static, good for regression tests
+    // Moved the complexity of the calculus out of the tests and
+    // gave the responsibility to assert the data as it is static
     checkoutElements
       .getValueProducts()
       .eq(1)
@@ -96,13 +93,9 @@ class CheckoutPage {
     checkoutElements.getSubmit().click();
   }
 
-  // As mentioned in the README file, this is
-  // a simple validation to check if the message contains
+  // A simple validation to check if the message contains
   // a key word so it is not every character dependent
   // since there is a list of possible messages.
-  // I opted to go for the simplest solution and as much independent as possible,
-  // but if there is a change in the key word or instead of a string we show a picture then we
-  // would need to update this again.
   // Another solution could be getting these messages straight from the development code
   // but then this would assert the expected message is there, but if development code
   // has the wrong value then the test would be also wrong.
@@ -117,11 +110,12 @@ class CheckoutPage {
     return this;
   }
   validateDeclinedMessage(user) {
-    checkoutElements.getErrorValidation({ timeout: 5000 }).should("be.visible");
+    checkoutElements.getErrorValidation({ timeout: 6000 }).should("be.visible");
     checkoutElements.getErrorValidation().should("contain", user.message);
   }
 
-  // *** Get elements from Iframe test approach *** //
+  // ***********************************************
+  // *** Get elements from Iframe test approach ****
 
   submitCardPaymentFromIframe() {
     checkoutElements.getSubmitFromIframe().click();
@@ -170,7 +164,7 @@ class CheckoutPage {
   validateAuthenticationMessage(user) {
     //cypress-wait-until plugin didnt work as I expected so I added a wait here,
     //another solution could be slowing down the speed of cypress.
-    cy.wait(5000);
+    cy.wait(3000);
     checkoutElements.getAuthenticationValidation().should("be.visible");
     checkoutElements
       .getAuthenticationValidation()
